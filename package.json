@@ -24,5 +24,17 @@
   },
   "devDependencies": {
     "picidae": "^1.1.5"
-  }
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/picidaejs/picidae-transformer-react-doc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/picidaejs/picidae-transformer-react-doc/issues"
+  },
+  "homepage": "https://github.com/picidaejs/picidae-transformer-react-doc#readme"
 }

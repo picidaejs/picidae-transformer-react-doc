@@ -79,6 +79,9 @@ exports.remarkTransformer = function (opts) {
         visit(node, 'code', function (node, index, parent) {
             if (node.lang !== lang) return
 
+            var query = node.data && node.data.hProperties['data-query'] || {}
+            Object.assign(query, opts)
+
             var code = toString(node)
             var docAst;
             try {
@@ -92,7 +95,7 @@ exports.remarkTransformer = function (opts) {
             var innerProm = [Promise.resolve()]
             _.visitProps(docAst, function (value, propName, props) {
                 var desc = value.description || ''
-                desc = descModel === 'code' && desc && desc.trim()
+                desc = query.descModel === 'code' && desc && desc.trim()
                     ? '\n~~~~~javascript\n' + desc + '\n~~~~~\n'
                     : desc
                 innerProm.push(
