@@ -3,7 +3,7 @@
  * @author: Cuttle Cong
  * @date: 2017/11/11
  */
-var reactDocs = require('./vender/react-docgen')
+var reactDocs = require('./vender/react-docgen/dist/main')
 var visit = require('picidae/exports/unist-util-visit')
 var remark = require('picidae/exports/remark')
 var generate = require('picidae/lib/lib/loaders/markdown-loader/generate')
