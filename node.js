@@ -81,9 +81,7 @@ exports.remarkTransformer = function (opts) {
 
             var query = node.data && node.data.hProperties['data-query'] || '{}'
             query = JSON.parse(query)
-            console.log('before', query, opts)
             query = Object.assign({}, opts, query)
-            console.log('after', query)
 
             var code = toString(node)
             var docAst;
