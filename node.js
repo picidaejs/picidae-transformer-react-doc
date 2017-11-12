@@ -55,7 +55,7 @@ var id = 'transformer-react-doc'
 exports.remarkTransformer = function (opts) {
     var lang = opts.lang || 'react-doc'
     var i18n = opts.i18n || 'zh-CN'
-    var descModel = opts.descModel || 'md'; // 'md' | 'pre'
+    opts.descModel = opts.descModel || 'md'; // 'md' | 'code'
     // var align = opts.align || [null, null, null, null]
     var disableDefaultStyle = opts.disableDefaultStyle || false
 
@@ -79,8 +79,11 @@ exports.remarkTransformer = function (opts) {
         visit(node, 'code', function (node, index, parent) {
             if (node.lang !== lang) return
 
-            var query = node.data && node.data.hProperties['data-query'] || {}
-            Object.assign(query, opts)
+            var query = node.data && node.data.hProperties['data-query'] || '{}'
+            query = JSON.parse(query)
+            console.log('before', query, opts)
+            query = Object.assign({}, opts, query)
+            console.log('after', query)
 
             var code = toString(node)
             var docAst;
@@ -95,6 +98,7 @@ exports.remarkTransformer = function (opts) {
             var innerProm = [Promise.resolve()]
             _.visitProps(docAst, function (value, propName, props) {
                 var desc = value.description || ''
+
                 desc = query.descModel === 'code' && desc && desc.trim()
                     ? '\n~~~~~javascript\n' + desc + '\n~~~~~\n'
                     : desc
