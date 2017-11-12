@@ -1,0 +1,17 @@
+<table class="transformer-react-doc">
+    <thead>
+        <tr>
+            {% for val in head %}
+            <th class="{{val.class}}">{{ val.text | safe }}</th>{% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in body %}
+        <tr>
+            {% for val in row %}
+            <td class="{{val.class}}" {% if val.data %} data-hide-extra="{{val.data}}" {% endif %}>{{ val.text | safe }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
