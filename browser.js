@@ -2,7 +2,7 @@
  * @file: browser
  * @author: Cuttle Cong
  * @date: 2017/11/11
- * @description: 
+ * @description:
  */
 import React from 'picidae/exports/react';
 import {utils} from 'picidae/exports/html-to-react';
@@ -111,7 +111,11 @@ module.exports = function (opt) {
                         && findParent(node, p => p.attribs && p.attribs['class'] === ID)
                 },
                 processNode(node, children, index) {
-                    const data = JSON.parse(node.attribs['data-hide-extra'])
+                    let data = node.attribs['data-hide-extra']
+                    try {
+                        data = JSON.parse(node.attribs['data-hide-extra'])
+                    } catch (e) {}
+
                     const stringified = stringify(data)
                     if (data && stringified) {
                         children = (
